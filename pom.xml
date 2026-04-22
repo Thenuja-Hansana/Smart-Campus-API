@@ -14,7 +14,7 @@
     <groupId>com.smartcampus</groupId>
     <artifactId>smartcampus-api</artifactId>
     <version>1.0</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>SmartCampus Sensor and Room Management API</name>
 
     <properties>
@@ -31,12 +31,12 @@
     <dependencies>
 
         <!-- =========================================================
-             Jersey 2.x + Grizzly embedded HTTP server
+             Jersey 2.x Servlet Container
              Provides the javax.ws.rs.* namespace required by the spec
              ========================================================= -->
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-grizzly2-http</artifactId>
+            <artifactId>jersey-container-servlet</artifactId>
             <version>${jersey.version}</version>
         </dependency>
 
@@ -77,48 +77,14 @@
                 </configuration>
             </plugin>
 
-            <!-- Fat / uber-JAR so the server runs with: java -jar target/smartcampus-api-1.0-jar-with-dependencies.jar -->
+            <!-- War Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.6.0</version>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>${mainClass}</mainClass>
-                        </manifest>
-                    </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>assemble-all</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Run directly without building a JAR: mvn exec:java
-                 The jvmArguments below are required for Jersey 2.x on JDK 17+. -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <mainClass>${mainClass}</mainClass>
-                    <jvmArguments>
-                        <jvmArgument>--add-opens=java.base/java.lang=ALL-UNNAMED</jvmArgument>
-                        <jvmArgument>--add-opens=java.base/java.util=ALL-UNNAMED</jvmArgument>
-                        <jvmArgument>--add-opens=java.base/java.io=ALL-UNNAMED</jvmArgument>
-                        <jvmArgument>--add-opens=java.base/java.lang.reflect=ALL-UNNAMED</jvmArgument>
-                        <jvmArgument>--add-opens=java.base/java.net=ALL-UNNAMED</jvmArgument>
-                        <jvmArgument>--add-opens=jdk.unsupported/sun.misc=ALL-UNNAMED</jvmArgument>
-                    </jvmArguments>
+                    <!-- We are using JAX-RS annotations (@ApplicationPath) instead of web.xml -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
 

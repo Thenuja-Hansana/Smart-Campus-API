@@ -29,16 +29,12 @@ The **SmartCampusAPI** is a RESTful web service built with JAX-RS (Jersey) to ma
 
 ### Execution Steps
 1.  **Extract** the project folder.
-2.  **Open terminal** in the `SmartCampusAPI` directory.
-3.  **Clean and Build**:
-    ```bash
-    mvn clean install
-    ```
-4.  **Run the Server**:
-    ```bash
-    mvn exec:java -Dexec.mainClass="com.smartcampus.Main"
-    ```
-    *The server will start at `http://localhost:8080/api/v1`*
+2.  **Open in IDE**: Open the project folder in Apache NetBeans (File > Open Project). NetBeans will recognize it as a Maven Web Application.
+3.  **Clean and Build**: Right-click the project folder in NetBeans and select "Clean and Build". This generates the `smartcampus-api-1.0.war` file in the `target/` directory.
+4.  **Deploy and Run**: 
+    - Right-click the project and select "Run" (NetBeans will deploy the `.war` to your configured application server like Tomcat or GlassFish).
+    - Alternatively, manually copy `target/smartcampus-api-1.0.war` into your server's deployment directory (`webapps` for Tomcat, `autodeploy` for GlassFish).
+    *(Note: Depending on your server, the base URL below might include the project name, e.g., `http://localhost:8080/smartcampus-api-1.0/api/v1`).*
 
 ---
 
@@ -46,33 +42,33 @@ The **SmartCampusAPI** is a RESTful web service built with JAX-RS (Jersey) to ma
 
 ### A. API Discovery
 ```bash
-curl -X GET http://localhost:8080/api/v1
+curl -X GET http://localhost:8080/smartcampus-api-1.0/api/v1
 ```
 
 ### B. Create a Room
 ```bash
-curl -X POST http://localhost:8080/api/v1/rooms \
+curl -X POST http://localhost:8080/smartcampus-api-1.0/api/v1/rooms \
      -H "Content-Type: application/json" \
      -d '{"id":"LIB-301", "name":"Library Quiet Study", "capacity":50}'
 ```
 
 ### C. Register a Sensor
 ```bash
-curl -X POST http://localhost:8080/api/v1/sensors \
+curl -X POST http://localhost:8080/smartcampus-api-1.0/api/v1/sensors \
      -H "Content-Type: application/json" \
      -d '{"id":"TEMP-001", "type":"Temperature", "roomId":"LIB-301"}'
 ```
 
 ### D. Post a Sensor Reading
 ```bash
-curl -X POST http://localhost:8080/api/v1/sensors/TEMP-001/readings \
+curl -X POST http://localhost:8080/smartcampus-api-1.0/api/v1/sensors/TEMP-001/readings \
      -H "Content-Type: application/json" \
      -d '{"value":22.5}'
 ```
 
 ### E. Filter Sensors by Type
 ```bash
-curl -X GET "http://localhost:8080/api/v1/sensors?type=Temperature"
+curl -X GET "http://localhost:8080/smartcampus-api-1.0/api/v1/sensors?type=Temperature"
 ```
 
 ---
