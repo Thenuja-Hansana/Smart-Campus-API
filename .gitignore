@@ -1,4 +1,4 @@
-*.txt
-*.pdf
 target/
-.mvn/nb-configuration.xml
+.mvn/
+nb-configuration.xml
+nbactions.xml
