@@ -45,7 +45,7 @@ The Smart Campus API follows REST architectural principles to expose three core 
 | Server | Apache Tomcat (bundled with NetBeans) |
 | Storage | In-memory `ConcurrentHashMap` / `ArrayList` |
 
-> ⚠️ **No Spring Boot. No SQL database. Pure JAX-RS only.**
+**No Spring Boot. No SQL database. Pure JAX-RS only.**
 
 ---
 
@@ -99,8 +99,7 @@ SmartCampusAPI/
 **Option B: Build with Maven CLI**
 ```bash
 # 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/SmartCampusAPI.git
-cd SmartCampusAPI
+git clone [https://github.com/YOUR_USERNAME/SmartCampusAPI.git](https://github.com/Thenuja-Hansana/Smart-Campus-API.git
 
 # 2. Build the WAR file
 mvn clean package
